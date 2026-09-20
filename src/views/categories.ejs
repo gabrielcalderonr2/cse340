@@ -1,89 +1,56 @@
 <%- include("partials/header") %>
 
 <section class="page-intro">
-  <p class="section-label">FIND YOUR CAUSE</p>
+    <p class="section-label">FIND YOUR CAUSE</p>
 
-  <h1>Service Project Categories</h1>
+    <h1>Service Project Categories</h1>
 
-  <p>
-    Explore service opportunities by choosing an area that matters to you.
-  </p>
+    <p>
+        Explore service opportunities by choosing an area that matters to you.
+    </p>
 </section>
 
 <section class="category-grid">
 
-  <article class="category-card">
-    <div class="category-icon" aria-hidden="true">🌱</div>
+    <% categories.forEach(category => { %>
+        <article class="category-card">
 
-    <h2>Environmental</h2>
+            <div class="category-icon" aria-hidden="true">
+                <% if (category.name === 'Environment') { %>
+                    🌱
+                <% } else if (category.name === 'Education') { %>
+                    📚
+                <% } else { %>
+                    🤝
+                <% } %>
+            </div>
 
-    <p>
-      Help protect our environment through cleanups, conservation,
-      recycling, and sustainability projects.
-    </p>
+            <h2><%= category.name %></h2>
 
-    <a href="/projects" class="category-link">
-      Explore projects →
-    </a>
-  </article>
+            <p>
+                Explore service opportunities and make a difference
+                in your community through <%= category.name.toLowerCase() %>.
+            </p>
 
-  <article class="category-card">
-    <div class="category-icon" aria-hidden="true">📚</div>
+            <a href="/projects" class="category-link">
+                Explore projects →
+            </a>
 
-    <h2>Educational</h2>
-
-    <p>
-      Support students and lifelong learning through tutoring,
-      mentoring, and educational programs.
-    </p>
-
-    <a href="/projects" class="category-link">
-      Explore projects →
-    </a>
-  </article>
-
-  <article class="category-card">
-    <div class="category-icon" aria-hidden="true">🤝</div>
-
-    <h2>Community Service</h2>
-
-    <p>
-      Strengthen neighborhoods by helping families, supporting
-      local organizations, and serving your community.
-    </p>
-
-    <a href="/projects" class="category-link">
-      Explore projects →
-    </a>
-  </article>
-
-  <article class="category-card">
-    <div class="category-icon" aria-hidden="true">❤️</div>
-
-    <h2>Health and Wellness</h2>
-
-    <p>
-      Make a difference by supporting health awareness, wellness,
-      and initiatives that improve quality of life.
-    </p>
-
-    <a href="/projects" class="category-link">
-      Explore projects →
-    </a>
-  </article>
+        </article>
+    <% }) %>
 
 </section>
 
 <section class="impact-callout">
-  <h2>Find something that inspires you.</h2>
+    <h2>Find something that inspires you.</h2>
 
-  <p>
-    Your time and talents can help create meaningful change.
-  </p>
+    <p>
+        Your time and talents can help create meaningful change.
+    </p>
 
-  <a href="/projects" class="dark-button">
-    Explore Projects →
-  </a>
+    <a href="/projects" class="dark-button">
+        Explore Projects →
+    </a>
 </section>
 
 <%- include("partials/footer") %>

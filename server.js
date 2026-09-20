@@ -5,6 +5,7 @@ import path from "path"
 import { testConnection } from "./src/models/db.js"
 import { getAllProjects } from "./src/models/projects.js"
 import { getAllOrganizations } from "./src/models/organizations.js"
+import { getAllCategories } from './src/models/categories.js';
 
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || "development"
@@ -46,10 +47,14 @@ app.get("/projects", async (req, res) => {
   res.render("projects", { title, projects })
 })
 
-app.get("/categories", (req, res) => {
-  const title = "Categories"
-  res.render("categories", { title })
-})
+app.get('/categories', async (req, res) => {
+    const categories = await getAllCategories();
+
+    res.render('categories', {
+        title: 'Categories',
+        categories
+    });
+});
 
 app.listen(PORT, async () => {
   try {

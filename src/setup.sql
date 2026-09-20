@@ -132,3 +132,62 @@ VALUES
 (3, 'Community Volunteer Fair',
  'Help organize a fair to connect volunteers with local causes.',
  'Sangolqui, Ecuador', '2026-11-03');
+-- ========================================
+-- Category Table
+-- ========================================
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Insert sample data: Categories
+-- ========================================
+
+INSERT INTO category (name)
+VALUES
+    ('Environment'),
+    ('Community Development'),
+    ('Education');
+
+-- ========================================
+-- Project Category Table (Many-to-Many)
+-- ========================================
+
+CREATE TABLE project_category (
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+);
+
+-- ========================================
+-- Assign Categories to Service Projects
+-- ========================================
+
+INSERT INTO project_category (project_id, category_id)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 1),
+    (5, 2),
+    (6, 3),
+    (7, 1),
+    (8, 2),
+    (9, 3),
+    (10, 1),
+    (11, 2),
+    (12, 3),
+    (13, 1),
+    (14, 2),
+    (15, 3);
