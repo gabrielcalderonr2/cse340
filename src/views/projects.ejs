@@ -1,3 +1,4 @@
+
 <%- include("partials/header") %>
 
 <section class="page-intro">
@@ -13,62 +14,46 @@
 
 <section class="project-grid">
 
-  <article class="project-card">
-    <div class="project-icon" aria-hidden="true">🌱</div>
+  <% if (projects && projects.length > 0) { %>
 
-    <div class="project-content">
-      <span class="project-category">Environmental</span>
+    <% projects.forEach(project => { %>
 
-      <h2>Neighborhood Cleanup</h2>
+      <article class="project-card">
+        <div class="project-icon" aria-hidden="true">🌱</div>
 
-      <p>
-        Join volunteers in cleaning parks, public spaces, and neighborhoods
-        while helping create cleaner and healthier communities.
-      </p>
+        <div class="project-content">
 
-      <a href="/categories" class="card-button">
-        View Category →
-      </a>
-    </div>
-  </article>
+          <span class="project-category">
+            <%= project.location %>
+          </span>
 
-  <article class="project-card">
-    <div class="project-icon" aria-hidden="true">📚</div>
+          <h2><%= project.title %></h2>
 
-    <div class="project-content">
-      <span class="project-category">Educational</span>
+          <p>
+            <%= project.description %>
+          </p>
 
-      <h2>School Supply Drive</h2>
+          <p>
+  <strong>Date:</strong>
+  <%= new Date(project.project_date).toLocaleDateString("en-US", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }) %>:
+  <%= project.title %>
+  (<%= project.organization_name %>)
+</p>
+        </div>
+      </article>
 
-      <p>
-        Collect and distribute educational materials to students who need
-        additional resources to succeed.
-      </p>
+    <% }); %>
 
-      <a href="/categories" class="card-button">
-        View Category →
-      </a>
-    </div>
-  </article>
+  <% } else { %>
 
-  <article class="project-card">
-    <div class="project-icon" aria-hidden="true">❤️</div>
+    <p>No service projects are currently available.</p>
 
-    <div class="project-content">
-      <span class="project-category">Health and Wellness</span>
-
-      <h2>Community Health Fair</h2>
-
-      <p>
-        Support health awareness, wellness education, and community initiatives
-        that help people live healthier lives.
-      </p>
-
-      <a href="/categories" class="card-button">
-        View Category →
-      </a>
-    </div>
-  </article>
+  <% } %>
 
 </section>
 
