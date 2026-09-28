@@ -2,13 +2,12 @@
 
 <section class="page-intro">
 
-  <p class="section-label">MAKE AN IMPACT</p>
+  <p class="section-label">SERVICE CATEGORY</p>
 
-  <h1>Upcoming Service Projects</h1>
+  <h1><%= category.name %></h1>
 
   <p>
-    Discover meaningful opportunities to serve, connect with others,
-    and create positive change in your community.
+    Explore service projects that belong to this category.
   </p>
 
 </section>
@@ -50,7 +49,7 @@
           </p>
 
           <p>
-            Organization:
+            <strong>Organization:</strong>
             <a href="/organization/<%= project.organization_id %>">
               <%= project.organization_name %>
             </a>
@@ -64,23 +63,9 @@
 
   <% } else { %>
 
-    <p>No service projects are currently available.</p>
+    <p>No service projects are currently available for this category.</p>
 
   <% } %>
-
-</section>
-
-<section class="impact-callout">
-
-  <h2>Every action makes a difference.</h2>
-
-  <p>
-    Find an opportunity, give your time, and help strengthen your community.
-  </p>
-
-  <a href="/organizations" class="dark-button">
-    Find an Organization →
-  </a>
 
 </section>
 

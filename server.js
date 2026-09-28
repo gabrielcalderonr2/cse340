@@ -1,12 +1,8 @@
-
 import express from "express"
 import { fileURLToPath } from "url"
 import path from "path"
 import { testConnection } from "./src/models/db.js"
-import { getAllProjects } from "./src/models/projects.js"
-import { getAllOrganizations } from "./src/models/organizations.js"
-import { getAllCategories } from './src/models/categories.js';
-
+import routes from "./src/routes.js"
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || "development"
 const PORT = process.env.PORT || 3000
@@ -24,37 +20,28 @@ app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "src/views"))
 
 // Routes
+app.use(routes)
+
 app.get("/", (req, res) => {
   const title = "Home"
   res.render("home", { title })
 })
 
-// Organizations route
-app.get("/organizations", async (req, res) => {
-  const organizations = await getAllOrganizations()
-  const title = "Organizations"
-
-  res.render("organizations", { title, organizations })
+// 404 error handler
+app.use((req, res) => {
+  res.status(404).render("404", {
+    title: "Page Not Found"
+  })
 })
 
-// Service Projects route
-// Service Projects route
-app.get("/projects", async (req, res) => {
-  const projects = await getAllProjects()
+// 500 error handler
+app.use((err, req, res, next) => {
+  console.error(err)
 
-  const title = "Service Projects"
-
-  res.render("projects", { title, projects })
+  res.status(500).render("500", {
+    title: "Server Error"
+  })
 })
-
-app.get('/categories', async (req, res) => {
-    const categories = await getAllCategories();
-
-    res.render('categories', {
-        title: 'Categories',
-        categories
-    });
-});
 
 app.listen(PORT, async () => {
   try {

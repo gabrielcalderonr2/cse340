@@ -1,0 +1,77 @@
+<%- include("partials/header") %>
+
+<section class="page-intro">
+
+  <p class="section-label">SERVICE PROJECT</p>
+
+  <h1><%= project.title %></h1>
+
+  <p>
+    Learn more about this service opportunity and how you can make an impact.
+  </p>
+
+</section>
+
+<section class="project-details">
+
+  <div class="project-card">
+
+    <div class="project-content">
+
+      <p>
+        <strong>Description:</strong>
+      </p>
+
+      <p>
+        <%= project.description %>
+      </p>
+
+      <p>
+        <strong>Date:</strong>
+        <%= new Date(project.date).toLocaleDateString("en-US", {
+          timeZone: "UTC",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        }) %>
+      </p>
+
+      <p>
+        <strong>Location:</strong>
+        <%= project.location %>
+      </p>
+
+      <p>
+        <strong>Categories:</strong>
+
+        <% if (categories && categories.length > 0) { %>
+
+          <% categories.forEach(category => { %>
+
+            <a href="/category/<%= category.category_id %>">
+              <%= category.name %>
+            </a>
+
+          <% }); %>
+
+        <% } else { %>
+
+          No categories assigned.
+
+        <% } %>
+      </p>
+
+      <p>
+        <strong>Organization:</strong>
+        <a href="/organization/<%= project.organization_id %>">
+          <%= project.organization_name %>
+        </a>
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<%- include("partials/footer") %>

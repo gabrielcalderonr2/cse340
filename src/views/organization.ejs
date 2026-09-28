@@ -1,0 +1,99 @@
+<%- include("partials/header") %>
+
+<section class="page-intro">
+
+  <p class="section-label">PARTNER ORGANIZATION</p>
+
+  <h1><%= organization.name %></h1>
+
+  <p>
+    Learn more about this organization and the work it does in the community.
+  </p>
+
+</section>
+
+<section class="organization-details">
+
+  <div class="organization-card">
+
+    <div class="organization-content">
+
+      <h2><%= organization.name %></h2>
+
+      <p>
+        <strong>Description:</strong>
+      </p>
+
+      <p>
+        <%= organization.description %>
+      </p>
+
+      <p>
+        <strong>Contact:</strong>
+        <%= organization.contact_email %>
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="organization-projects">
+
+  <h2>Service Projects</h2>
+
+  <% if (projects && projects.length > 0) { %>
+
+    <div class="project-grid">
+
+      <% projects.forEach(project => { %>
+
+        <article class="project-card">
+
+          <div class="project-icon" aria-hidden="true">🌱</div>
+
+          <div class="project-content">
+
+            <h3>
+              <a href="/project/<%= project.project_id %>">
+                <%= project.title %>
+              </a>
+            </h3>
+
+            <p>
+              <%= project.description %>
+            </p>
+
+            <p>
+              <strong>Date:</strong>
+              <%= new Date(project.date).toLocaleDateString("en-US", {
+                timeZone: "UTC",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+              }) %>
+            </p>
+
+            <p>
+              <strong>Location:</strong>
+              <%= project.location %>
+            </p>
+
+          </div>
+
+        </article>
+
+      <% }); %>
+
+    </div>
+
+  <% } else { %>
+
+    <p>No service projects are currently available for this organization.</p>
+
+  <% } %>
+
+</section>
+
+<%- include("partials/footer") %>
