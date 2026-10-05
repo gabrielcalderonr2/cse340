@@ -1,4 +1,6 @@
 import express from "express"
+import session from "express-session"
+import flash from "connect-flash"
 import { fileURLToPath } from "url"
 import path from "path"
 import { testConnection } from "./src/models/db.js"
@@ -12,8 +14,24 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 
+app.use(
+  session({
+    secret: "cse340-secret",
+    resave: false,
+    saveUninitialized: false
+  })
+)
+
+app.use(flash())
+
+app.use((req, res, next) => {
+  res.locals.messages = req.flash()
+  next()
+})
+
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, "public")))
+app.use(express.urlencoded({ extended: true }))
 
 // Configure EJS
 app.set("view engine", "ejs")

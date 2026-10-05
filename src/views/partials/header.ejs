@@ -30,4 +30,16 @@
     </div>
   </header>
 
+  <% if (messages && messages.error && messages.error.length > 0) { %>
+    <div class="flash-message error">
+      <%= messages.error[0] %>
+    </div>
+  <% } %>
+
+  <% if (messages && messages.success && messages.success.length > 0) { %>
+    <div class="flash-message success">
+      <%= messages.success[0] %>
+    </div>
+  <% } %>
+
   <main>

@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+
+<section class="page-intro">
+    <p class="section-label">MANAGE CATEGORIES</p>
+
+    <h1>Create New Category</h1>
+
+    <p>
+        Add a new category for service projects.
+    </p>
+</section>
+
+<section class="form-section">
+    <div class="form-card">
+
+        <form action="/new-category" method="POST">
+
+            <div class="form-group">
+                <label for="name">Category Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    maxlength="100"
+                >
+            </div>
+
+            <button type="submit" class="dark-button">
+                Create Category
+            </button>
+
+        </form>
+
+    </div>
+</section>
+
+<%- include("partials/footer") %>

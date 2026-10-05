@@ -12,7 +12,12 @@ import {
 
 import {
     showCategoriesPage,
-    showCategoryDetailsPage
+    showCategoryDetailsPage,
+    showNewCategoryForm,
+    processNewCategoryForm,
+    showEditCategoryForm,
+    processEditCategoryForm,
+    categoryValidation
 } from "./controllers/categories.js";
 
 const router = express.Router();
@@ -28,5 +33,21 @@ router.get("/organization/:id", showOrganizationDetailsPage);
 router.get("/categories", showCategoriesPage);
 
 router.get("/category/:id", showCategoryDetailsPage);
+
+router.get("/new-category", showNewCategoryForm);
+
+router.get("/edit-category/:id", showEditCategoryForm);
+
+router.post(
+    "/edit-category/:id",
+    categoryValidation,
+    processEditCategoryForm
+);
+
+router.post(
+    "/new-category",
+    categoryValidation,
+    processNewCategoryForm
+);
 
 export default router;
