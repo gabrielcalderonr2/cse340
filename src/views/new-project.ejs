@@ -1,0 +1,96 @@
+
+<%- include("partials/header") %>
+
+<section class="page-intro">
+    <p class="section-label">MANAGE SERVICE PROJECTS</p>
+
+    <h1>Create New Service Project</h1>
+
+    <p>
+        Add a service opportunity for your community.
+    </p>
+</section>
+
+<section class="form-section">
+    <div class="form-card">
+
+        <form action="/new-project" method="POST">
+
+            <div class="form-group">
+                <label for="organization_id">Organization</label>
+
+                <select
+                    id="organization_id"
+                    name="organization_id"
+                    required
+                >
+                    <option value="">Select an organization</option>
+
+                    <% organizations.forEach(organization => { %>
+                        <option value="<%= organization.organization_id %>">
+                            <%= organization.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Project Title</label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    maxlength="150"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    maxlength="150"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="project_date">Project Date</label>
+
+                <input
+                    type="date"
+                    id="project_date"
+                    name="project_date"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="dark-button">
+                Create Service Project
+            </button>
+
+            <a href="/projects" class="category-link">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+</section>
+
+<%- include("partials/footer") %>

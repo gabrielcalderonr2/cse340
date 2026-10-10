@@ -786,3 +786,18 @@ a:focus-visible {
     color: #c62828;
     border-color: #e57373;
 }
+
+
+/* ===== ACTION BUTTONS ===== */
+.category-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.category-actions .card-button,
+.category-actions .dark-button {
+  margin-top: 0;
+}

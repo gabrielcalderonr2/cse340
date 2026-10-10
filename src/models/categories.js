@@ -91,11 +91,42 @@ const getProjectsByCategory = async (categoryId) => {
     return result.rows;
 };
 
+
+const updateProjectCategories = async (projectId, categoryIds) => {
+    const client = await db.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        await client.query(
+            "DELETE FROM project_category WHERE project_id = $1",
+            [projectId]
+        );
+
+        for (const categoryId of categoryIds) {
+            await client.query(
+                `INSERT INTO project_category (project_id, category_id)
+                 VALUES ($1, $2)`,
+                [projectId, categoryId]
+            );
+        }
+
+        await client.query("COMMIT");
+    } catch (error) {
+        await client.query("ROLLBACK");
+        throw error;
+    } finally {
+        client.release();
+    }
+};
+
+
 export {
     getAllCategories,
     getCategoryDetails,
     getCategoriesByProject,
     getProjectsByCategory,
     createCategory,
-    updateCategory
+    updateCategory,
+    updateProjectCategories
 };

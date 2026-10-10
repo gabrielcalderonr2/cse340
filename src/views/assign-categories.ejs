@@ -1,0 +1,61 @@
+
+<%- include("partials/header") %>
+
+<section class="page-intro">
+    <p class="section-label">MANAGE SERVICE PROJECTS</p>
+
+    <h1>Assign Categories</h1>
+
+    <p>
+        Select the categories that apply to
+        <strong><%= project.title %></strong>.
+    </p>
+</section>
+
+<section class="form-section">
+    <div class="form-card">
+
+        <form
+            action="/project/<%= project.project_id %>/categories"
+            method="POST"
+        >
+            <fieldset>
+                <legend>Available Categories</legend>
+
+                <% if (categories && categories.length > 0) { %>
+                    <% categories.forEach(category => { %>
+                        <div class="form-group">
+                            <input
+                                type="checkbox"
+                                id="category-<%= category.category_id %>"
+                                name="category_ids"
+                                value="<%= category.category_id %>"
+                                <%= assignedCategoryIds.includes(Number(category.category_id)) ? "checked" : "" %>
+                            >
+
+                            <label for="category-<%= category.category_id %>">
+                                <%= category.name %>
+                            </label>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No categories are available.</p>
+                <% } %>
+            </fieldset>
+
+            <button type="submit" class="dark-button">
+                Save Categories
+            </button>
+
+            <a
+                href="/project/<%= project.project_id %>"
+                class="category-link"
+            >
+                Cancel
+            </a>
+        </form>
+
+    </div>
+</section>
+
+<%- include("partials/footer") %>

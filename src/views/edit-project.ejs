@@ -1,0 +1,89 @@
+
+<%- include("partials/header") %>
+
+<section class="page-intro">
+    <p class="section-label">MANAGE SERVICE PROJECTS</p>
+
+    <h1>Edit Service Project</h1>
+
+    <p>Update the information for this service opportunity.</p>
+</section>
+
+<section class="form-section">
+    <div class="form-card">
+        <form action="/edit-project/<%= project.project_id %>" method="POST">
+
+            <div class="form-group">
+                <label for="organization_id">Organization</label>
+
+                <select id="organization_id" name="organization_id" required>
+                    <option value="">Select an organization</option>
+
+                    <% organizations.forEach(organization => { %>
+                        <option
+                            value="<%= organization.organization_id %>"
+                            <%= Number(organization.organization_id) === Number(project.organization_id) ? "selected" : "" %>
+                        >
+                            <%= organization.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Project Title</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value="<%= project.title %>"
+                    maxlength="150"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    required
+                ><%= project.description %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    value="<%= project.location %>"
+                    maxlength="150"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="project_date">Project Date</label>
+                <input
+                    type="date"
+                    id="project_date"
+                    name="project_date"
+                    value="<%= project.date instanceof Date ? project.date.toISOString().slice(0, 10) : String(project.date).slice(0, 10) %>"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="dark-button">
+                Update Service Project
+            </button>
+
+            <a href="/project/<%= project.project_id %>" class="category-link">
+                Cancel
+            </a>
+        </form>
+    </div>
+</section>
+
+<%- include("partials/footer") %>
