@@ -27,12 +27,69 @@
       <div class="dashboard-card">
         <h2>Administration</h2>
         <p>Manage registered users and review their roles.</p>
+
         <a href="/users" class="primary-button">
           View Registered Users
         </a>
       </div>
     <% } %>
   </div>
+
+  <section class="dashboard-card volunteer-dashboard">
+    <h2>My Volunteer Projects</h2>
+    <p>Review the service projects you have signed up for.</p>
+
+    <% if (volunteerProjects && volunteerProjects.length > 0) { %>
+      <div class="volunteer-project-list">
+        <% volunteerProjects.forEach(project => { %>
+          <article class="volunteer-project-item">
+            <h3>
+              <a href="/project/<%= project.project_id %>">
+                <%= project.title %>
+              </a>
+            </h3>
+
+            <p>
+              <strong>Organization:</strong>
+              <%= project.organization_name %>
+            </p>
+
+            <p>
+              <strong>Location:</strong>
+              <%= project.location %>
+            </p>
+
+            <p>
+              <strong>Date:</strong>
+              <%= new Date(project.project_date).toLocaleDateString("en-US", {
+                timeZone: "UTC",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+              }) %>
+            </p>
+
+            <form
+              action="/project/<%= project.project_id %>/remove-volunteer"
+              method="POST"
+            >
+              <button type="submit" class="dark-button">
+                Remove My Signup
+              </button>
+            </form>
+          </article>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p>
+        You have not signed up for any service projects yet.
+      </p>
+
+      <a href="/projects" class="primary-button">
+        Browse Service Projects
+      </a>
+    <% } %>
+  </section>
 
   <form action="/logout" method="POST" style="margin-top: 2rem;">
     <button type="submit" class="primary-button">Log Out</button>

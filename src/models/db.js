@@ -1,11 +1,19 @@
 import "dotenv/config"
 import { Pool } from "pg"
 
+const isLocalDatabase =
+  process.env.DB_URL?.includes("localhost:5433") ||
+  process.env.DB_URL?.includes("127.0.0.1:5433")
+
 const pool = new Pool({
   connectionString: process.env.DB_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ...(isLocalDatabase
+    ? {}
+    : {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }),
 })
 
 let db = null
@@ -38,8 +46,8 @@ if (
       }
     },
     async connect() {
-  return pool.connect();
-},
+      return pool.connect()
+    },
     async close() {
       await pool.end()
     },

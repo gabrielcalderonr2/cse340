@@ -6,6 +6,8 @@ import {
   getAllUsers,
 } from "../models/users.js";
 
+import { getVolunteerProjects } from "../models/volunteers.js";
+
 // Display the registration form
 export function showRegister(req, res) {
   res.render("register", { title: "Register" });
@@ -128,13 +130,24 @@ export function requireRole(role) {
 }
 
 // Display the authenticated user's dashboard
-export function showDashboard(req, res) {
-  res.render("dashboard", {
-    title: "Dashboard",
-    name: req.session.user.name,
-    email: req.session.user.email,
-  });
+
+export async function showDashboard(req, res, next) {
+  try {
+    const user = req.session.user;
+
+    const volunteerProjects = await getVolunteerProjects(user.user_id);
+
+    return res.render("dashboard", {
+      title: "Dashboard",
+      name: user.name,
+      email: user.email,
+      volunteerProjects,
+    });
+  } catch (error) {
+    return next(error);
+  }
 }
+
 
 // Display all registered users (administrators only)
 export async function showUsers(req, res, next) {

@@ -10,6 +10,8 @@ import {
     processEditProjectForm,
     showAssignCategoriesForm,
     processAssignCategoriesForm,
+    processVolunteer,
+    processRemoveVolunteer,
     projectValidation
 } from "./controllers/projects.js";
 
@@ -79,6 +81,22 @@ router.get(
 router.get("/projects", showProjectsPage);
 
 router.get("/project/:id", showProjectDetailsPage);
+
+// ========================================
+// Volunteer Routes (Logged-in Users Only)
+// ========================================
+
+router.post(
+    "/project/:id/volunteer",
+    requireLogin,
+    processVolunteer
+);
+
+router.post(
+    "/project/:id/remove-volunteer",
+    requireLogin,
+    processRemoveVolunteer
+);
 
 // ========================================
 // Protected Project Routes (Admin Only)

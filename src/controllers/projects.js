@@ -11,6 +11,14 @@ import {
     getAllCategories
 } from "../models/categories.js";
 
+
+import {
+    addVolunteer,
+    removeVolunteer,
+    isVolunteer
+} from "../models/volunteers.js";
+
+
 import {
     getAllOrganizations
 } from "../models/organizations.js";
@@ -62,20 +70,91 @@ const showProjectsPage = async (req, res) => {
     res.render("projects", { title, projects });
 };
 
-const showProjectDetailsPage = async (req, res) => {
-    const projectId = req.params.id;
 
-    const project = await getProjectDetails(projectId);
-    const categories = await getCategoriesByProject(projectId);
+const showProjectDetailsPage = async (req, res, next) => {
+    try {
+        const projectId = req.params.id;
 
-    const title = "Service Project Details";
+        const project = await getProjectDetails(projectId);
 
-    res.render("project", {
-        title,
-        project,
-        categories
-    });
+        if (!project) {
+            req.flash("error", "Service project not found.");
+            return res.redirect("/projects");
+        }
+
+        const categories = await getCategoriesByProject(projectId);
+
+        let volunteering = false;
+
+        if (req.session.user) {
+            volunteering = await isVolunteer(
+                req.session.user.user_id,
+                projectId
+            );
+        }
+
+        const title = "Service Project Details";
+
+        return res.render("project", {
+            title,
+            project,
+            categories,
+            volunteering
+        });
+    } catch (error) {
+        return next(error);
+    }
 };
+
+
+const processVolunteer = async (req, res, next) => {
+    try {
+        const projectId = req.params.id;
+        const userId = req.session.user.user_id;
+
+        const project = await getProjectDetails(projectId);
+
+        if (!project) {
+            req.flash("error", "Service project not found.");
+            return res.redirect("/projects");
+        }
+
+        await addVolunteer(userId, projectId);
+
+        req.flash("success", "You are now volunteering for this project.");
+        return res.redirect(`/project/${projectId}`);
+    } catch (error) {
+        return next(error);
+    }
+};
+
+
+const processRemoveVolunteer = async (req, res, next) => {
+    try {
+        const projectId = req.params.id;
+        const userId = req.session.user.user_id;
+
+        const project = await getProjectDetails(projectId);
+
+        if (!project) {
+            req.flash("error", "Service project not found.");
+            return res.redirect("/projects");
+        }
+
+        await removeVolunteer(userId, projectId);
+
+        req.flash(
+            "success",
+            "You are no longer volunteering for this project."
+        );
+
+        return res.redirect(`/project/${projectId}`);
+    } catch (error) {
+        return next(error);
+    }
+};
+
+
 
 
 const showNewProjectForm = async (req, res) => {
@@ -251,6 +330,7 @@ const processAssignCategoriesForm = async (req, res) => {
 };
 
 
+
 export {
     showProjectsPage,
     showProjectDetailsPage,
@@ -260,5 +340,7 @@ export {
     processEditProjectForm,
     showAssignCategoriesForm,
     processAssignCategoriesForm,
+    processVolunteer,
+    processRemoveVolunteer,
     projectValidation
 };

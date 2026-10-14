@@ -54,6 +54,38 @@
         </a>
       </p>
 
+      <% if (user) { %>
+        <section class="volunteer-section">
+          <h2>Volunteer for this project</h2>
+
+          <% if (volunteering) { %>
+            <p>You are volunteering for this project.</p>
+
+            <form
+              action="/project/<%= project.project_id %>/remove-volunteer"
+              method="POST"
+            >
+              <button type="submit" class="dark-button">
+                Remove My Volunteer Signup
+              </button>
+            </form>
+          <% } else { %>
+            <p>
+              Interested in helping? Sign up to volunteer for this project.
+            </p>
+
+            <form
+              action="/project/<%= project.project_id %>/volunteer"
+              method="POST"
+            >
+              <button type="submit" class="primary-button">
+                Volunteer for This Project
+              </button>
+            </form>
+          <% } %>
+        </section>
+      <% } %>
+
       <% if (user && user.role_name === "admin") { %>
         <div class="category-actions">
           <a
