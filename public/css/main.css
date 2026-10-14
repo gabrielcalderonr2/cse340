@@ -801,3 +801,185 @@ a:focus-visible {
 .category-actions .dark-button {
   margin-top: 0;
 }
+
+/* ===== AUTHENTICATION FORMS ===== */
+
+.auth-container {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.auth-container p {
+  color: #52606d;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #263238;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #cbd5df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.auth-form input:focus {
+  outline: 2px solid #185a8d;
+  outline-offset: 1px;
+  border-color: #185a8d;
+}
+
+.auth-form button,
+.primary-button {
+  display: inline-block;
+  padding: 0.85rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #2e9d4d;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.auth-form button:hover,
+.primary-button:hover {
+  background-color: #267f3e;
+}
+
+.auth-container .auth-link {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.auth-link a {
+  color: #185a8d;
+  font-weight: 700;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+/* ===== DASHBOARD ===== */
+
+.dashboard-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.dashboard-welcome {
+  margin-bottom: 2rem;
+}
+
+.dashboard-welcome p {
+  color: #52606d;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.dashboard-card {
+  padding: 1.75rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+}
+
+.dashboard-card p {
+  margin-bottom: 1rem;
+  color: #52606d;
+}
+
+.dashboard-card a {
+  color: #185a8d;
+  font-weight: 700;
+}
+
+.dashboard-card a:hover {
+  text-decoration: underline;
+}
+
+/* ===== USERS TABLE ===== */
+
+.users-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid #e3e9ef;
+}
+
+.users-table th {
+  background-color: #163a5f;
+  color: #ffffff;
+}
+
+.users-table tbody tr:hover {
+  background-color: #f0f6fa;
+}
+
+.users-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== RESPONSIVE AUTH AND TABLES ===== */
+
+@media (max-width: 600px) {
+  .auth-container {
+    margin: 1rem auto;
+    padding: 1.5rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}

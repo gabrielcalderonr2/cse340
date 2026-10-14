@@ -1,3 +1,4 @@
+
 <%- include("partials/header") %>
 
 <section class="page-intro">
@@ -52,23 +53,27 @@
           <%= organization.description %>
         </p>
 
-        
-<div class="category-actions">
-  <a
-    href="/organization/<%= organization.organization_id %>"
-    class="card-button"
-  >
-    Learn More →
-  </a>
+        <div class="category-actions">
 
-  <a
-    href="/edit-organization/<%= organization.organization_id %>"
-    class="dark-button"
-  >
-    Edit Organization
-  </a>
-</div>
+          <a
+            href="/organization/<%= organization.organization_id %>"
+            class="card-button"
+          >
+            Learn More →
+          </a>
 
+          <% if (user && user.role_name === "admin") { %>
+
+            <a
+              href="/edit-organization/<%= organization.organization_id %>"
+              class="dark-button"
+            >
+              Edit Organization
+            </a>
+
+          <% } %>
+
+        </div>
 
       </div>
 
@@ -78,11 +83,15 @@
 
 </section>
 
-<div class="category-actions">
+<% if (user && user.role_name === "admin") { %>
+
+  <div class="category-actions">
     <a href="/new-organization" class="dark-button">
-        Create New Organization
+      Create New Organization
     </a>
-</div>
+  </div>
+
+<% } %>
 
 <section class="partner-callout">
 

@@ -1,0 +1,42 @@
+
+<%- include("partials/header") %>
+
+<section class="dashboard-container">
+  <div class="dashboard-welcome">
+    <h1>Dashboard</h1>
+    <p>Welcome, <strong><%= name %></strong>!</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <h2>My Profile</h2>
+      <p>View your account information.</p>
+
+      <p>
+        <strong>Name:</strong>
+        <%= name %>
+      </p>
+
+      <p>
+        <strong>Email:</strong>
+        <%= email %>
+      </p>
+    </div>
+
+    <% if (user && user.role_name === "admin") { %>
+      <div class="dashboard-card">
+        <h2>Administration</h2>
+        <p>Manage registered users and review their roles.</p>
+        <a href="/users" class="primary-button">
+          View Registered Users
+        </a>
+      </div>
+    <% } %>
+  </div>
+
+  <form action="/logout" method="POST" style="margin-top: 2rem;">
+    <button type="submit" class="primary-button">Log Out</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

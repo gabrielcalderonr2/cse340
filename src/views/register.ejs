@@ -1,0 +1,52 @@
+
+<%- include("partials/header") %>
+
+<section class="auth-container">
+  <h1>Create an Account</h1>
+  <p>Join Service Connect and discover service opportunities.</p>
+
+  <form action="/register" method="POST" class="auth-form">
+    <div>
+      <label for="name">Full Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        autocomplete="name"
+        required
+      >
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        autocomplete="email"
+        required
+      >
+    </div>
+
+    <div>
+      <label for="password">Password (minimum 7 characters)</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        minlength="7"
+        autocomplete="new-password"
+        required
+      >
+    </div>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p class="auth-link">
+    Already have an account?
+    <a href="/login">Log in</a>
+  </p>
+</section>
+
+<%- include("partials/footer") %>

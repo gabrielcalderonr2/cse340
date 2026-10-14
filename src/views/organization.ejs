@@ -1,7 +1,7 @@
+
 <%- include("partials/header") %>
 
 <section class="page-intro">
-
   <p class="section-label">PARTNER ORGANIZATION</p>
 
   <h1><%= organization.name %></h1>
@@ -9,13 +9,10 @@
   <p>
     Learn more about this organization and the work it does in the community.
   </p>
-
 </section>
 
 <section class="organization-details">
-
   <div class="organization-card">
-
     <div class="organization-content">
 
       <h2><%= organization.name %></h2>
@@ -33,14 +30,22 @@
         <%= organization.contact_email %>
       </p>
 
+      <% if (user && user.role_name === "admin") { %>
+        <div class="category-actions">
+          <a
+            href="/edit-organization/<%= organization.organization_id %>"
+            class="dark-button"
+          >
+            Edit Organization
+          </a>
+        </div>
+      <% } %>
+
     </div>
-
   </div>
-
 </section>
 
 <section class="organization-projects">
-
   <h2>Service Projects</h2>
 
   <% if (projects && projects.length > 0) { %>
@@ -48,7 +53,6 @@
     <div class="project-grid">
 
       <% projects.forEach(project => { %>
-
         <article class="project-card">
 
           <div class="project-icon" aria-hidden="true">🌱</div>
@@ -81,10 +85,8 @@
             </p>
 
           </div>
-
         </article>
-
-      <% }); %>
+      <% }) %>
 
     </div>
 
@@ -93,7 +95,6 @@
     <p>No service projects are currently available for this organization.</p>
 
   <% } %>
-
 </section>
 
 <%- include("partials/footer") %>

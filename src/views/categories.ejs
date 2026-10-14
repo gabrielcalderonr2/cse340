@@ -1,66 +1,77 @@
+
 <%- include("partials/header") %>
 
 <section class="page-intro">
-    <p class="section-label">FIND YOUR CAUSE</p>
+  <p class="section-label">FIND YOUR CAUSE</p>
 
-    <h1>Service Project Categories</h1>
+  <h1>Service Project Categories</h1>
 
-    <p>
-        Explore service opportunities by choosing an area that matters to you.
-    </p>
+  <p>
+    Explore service opportunities by choosing an area that matters to you.
+  </p>
 </section>
 
-<div class="category-actions">
+<% if (user && user.role_name === "admin") { %>
+  <div class="category-actions">
     <a href="/new-category" class="dark-button">
-        Create New Category
+      Create New Category
     </a>
-</div>
+  </div>
+<% } %>
 
 <section class="category-grid">
 
-    <% categories.forEach(category => { %>
-        <article class="category-card">
+  <% categories.forEach(category => { %>
+    <article class="category-card">
 
-            <div class="category-icon" aria-hidden="true">
-                <% if (category.name === 'Environment') { %>
-                    🌱
-                <% } else if (category.name === 'Education') { %>
-                    📚
-                <% } else { %>
-                    🤝
-                <% } %>
-            </div>
+      <div class="category-icon" aria-hidden="true">
+        <% if (category.name === "Environment") { %>
+          🌱
+        <% } else if (category.name === "Education") { %>
+          📚
+        <% } else { %>
+          🤝
+        <% } %>
+      </div>
 
-            <h2><%= category.name %></h2>
+      <h2><%= category.name %></h2>
 
-            <p>
-                Explore service opportunities and make a difference
-                in your community through <%= category.name.toLowerCase() %>.
-            </p>
+      <p>
+        Explore service opportunities and make a difference
+        in your community through <%= category.name.toLowerCase() %>.
+      </p>
 
-            <a href="/category/<%= category.category_id %>" class="category-link">
-    Explore projects →
-</a>
+      <a
+        href="/category/<%= category.category_id %>"
+        class="category-link"
+      >
+        Explore projects →
+      </a>
 
-<a href="/edit-category/<%= category.category_id %>" class="category-link">
-    Edit category →
-</a>
+      <% if (user && user.role_name === "admin") { %>
+        <a
+          href="/edit-category/<%= category.category_id %>"
+          class="category-link"
+        >
+          Edit category →
+        </a>
+      <% } %>
 
-        </article>
-    <% }) %>
+    </article>
+  <% }) %>
 
 </section>
 
 <section class="impact-callout">
-    <h2>Find something that inspires you.</h2>
+  <h2>Find something that inspires you.</h2>
 
-    <p>
-        Your time and talents can help create meaningful change.
-    </p>
+  <p>
+    Your time and talents can help create meaningful change.
+  </p>
 
-    <a href="/projects" class="dark-button">
-        Explore Projects →
-    </a>
+  <a href="/projects" class="dark-button">
+    Explore Projects →
+  </a>
 </section>
 
 <%- include("partials/footer") %>

@@ -13,11 +13,15 @@
 
 </section>
 
-<div class="category-actions">
+
+<% if (user && user.role_name === "admin") { %>
+  <div class="category-actions">
     <a href="/new-project" class="dark-button">
-        Create New Service Project
+      Create New Service Project
     </a>
-</div>
+  </div>
+<% } %>
+
 
 <section class="project-grid">
 

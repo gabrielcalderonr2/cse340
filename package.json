@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/gabrielcalderonr2/cse340#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "connect-flash": "^0.1.1",
     "dotenv": "^18.0.0",
     "ejs": "^6.0.1",
